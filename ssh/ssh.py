@@ -1,4 +1,6 @@
 from common.my_colors import MyColors
+
+
 class SSH:
     __instance = None
     __configs = {}
@@ -52,25 +54,35 @@ class SSH:
             return None
 
     def set_value(self, key, val, apply=False):
-        print(val)
-        self.__configs[key]['values'] = val
+        if not key in self.__configs:
+            self.__lines += 1
+            print(self.__lines)
+            self.__configs[key] = {'key': key, 'values': val, 'row': self.__lines, 'separator': ' '}
 
         if isinstance(val, list):
+            print("here 1")
             self.__configs[key]['values'].insert(0, key)
             self.__changed_lines[self.__configs[key]['row']] = self.__configs[key]['separator'] \
                 .join(self.__configs[key]['values'])
         else:
-            self.__changed_lines[self.__configs[key]['row']] = key + self.__configs[key]['separator'] + val
+            try:
+                self.__changed_lines[self.__configs[key]['row']] = key + self.__configs[key]['separator'] + val
+
+            except Exception as e:
+                print(Exception)
+                print(e)
         if (apply):
             self.apply_config()
 
     def print_output(self):
         for item in self.__configs.values():
-            print(f"  {MyColors.HEADER}{item['key']}{item['separator']}{MyColors.OKGREEN}{item['values']}{MyColors.ENDC}")
+            print(
+                f"  {MyColors.HEADER}{item['key']}{item['separator']}{MyColors.OKGREEN}{item['values']}{MyColors.ENDC}")
         print("\n")
+
     @staticmethod
     def get_instance():
-        if SSH.__instance == None:
+        if not SSH.__instance:
             try:
                 SSH.__instance = SSH()
             except FileNotFoundError as exception:
