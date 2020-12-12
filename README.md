@@ -1,4 +1,7 @@
+
+cp /etc/ssh/sshd_config /etc/ssh/sshd_config_tmp to prevent misconfiguration in ssh
 Run app.py
+
 commands:
 
 getting option value:
