@@ -1,23 +1,31 @@
+######  to prevent misconfiguration in ssh:
 
-cp /etc/ssh/sshd_config /etc/ssh/sshd_config_tmp to prevent misconfiguration in ssh
+`cp /etc/ssh/sshd_config /etc/ssh/sshd_config_temp`
+
 Run app.py
 
 commands:
 
-getting option value:
-    ssh.getval <option>
+###### getting option value:
 
-setting value:
-    ssh.setval <option>:<value>
+​    `ssh.getval <option>`
 
-getting all configs:
-    ssh.configs
+###### setting value:
 
-write config to file:
-    ssh.apply
+​    `ssh.setval <option>:<value>`
 
-getting docker version:
-    docker.ver
+###### getting all configs:
 
-getting docker build number:
-    docker.build
+​    `ssh.configs`
+
+###### write config to file:
+
+​    `ssh.apply`
+
+###### getting docker version:
+
+​    `docker.ver`
+
+###### getting docker build number:
+
+​    `docker.build`
